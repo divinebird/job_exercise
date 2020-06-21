@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:job_exercise/data_providers/childs.dart';
 import 'package:job_exercise/data_providers/employees.dart';
 import 'package:job_exercise/main.dart';
 import 'package:job_exercise/ui/employee_edit_page.dart';
@@ -41,6 +42,7 @@ class _EmployeeListPageState extends State<EmployeeListPage> {
 
   Widget _itemBuilder(BuildContext context, int index) {
     final curEmployee = context.watch<EmployeesProvider>().getEmployee(index);
+    final childsCount = context.watch<ChildsProvider>().getCountForParent(curEmployee.id);
     return Container(
       padding: EdgeInsets.all(5),
       child: Column(
@@ -57,7 +59,7 @@ class _EmployeeListPageState extends State<EmployeeListPage> {
           SizedBox(height: 3),
           Text('Должность: ${curEmployee.position}'),
           SizedBox(height: 3),
-          Text('Детей: ${curEmployee.childsCount}'),
+          Text('Детей: $childsCount'),
         ],
       ),
     );

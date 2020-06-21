@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:job_exercise/data_providers/childs.dart';
 import 'package:job_exercise/data_providers/employees.dart';
 import 'package:job_exercise/ui/employees_list_page.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +8,8 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(MultiProvider(providers:
       [
-        ChangeNotifierProvider(create: (_) => EmployeesProvider())
+        ChangeNotifierProvider(create: (_) => EmployeesProvider()),
+        ChangeNotifierProvider(create: (_) => ChildsProvider())
       ],
       child: App()));
 }

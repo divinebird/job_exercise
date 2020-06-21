@@ -88,7 +88,7 @@ class _EmployeeEditPageState extends State<EmployeeEditPage> {
   void _save() {
     if (_formKey.currentState.validate()) {
       context.read<EmployeesProvider>().addEmployee(Employee(null, firstname.controller.text, secondname.controller.text,
-          surname.controller.text, _birthdayTime, position.controller.text, 0));
+          surname.controller.text, _birthdayTime, position.controller.text));
       Navigator.pop(context);
     }
   }

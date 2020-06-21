@@ -1,10 +1,12 @@
 
+import 'package:uuid/uuid.dart';
+
 class People {
-  final int id;
+  final String id;
   final String firstname;
   final String secondname;
   final String surname;
   final DateTime birthday;
 
-  People(this.id, this.firstname, this.secondname, this.surname, this.birthday);
+  People(id, this.firstname, this.secondname, this.surname, this.birthday) : this.id = id ?? Uuid().v1();
 }

@@ -1,37 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:job_exercise/data_providers/employees.dart';
-import 'package:job_exercise/models/employee.dart';
+import 'package:job_exercise/data_providers/childs.dart';
+import 'package:job_exercise/models/child.dart';
 import 'package:job_exercise/ui/widgets/custom_date_form_field.dart';
 import 'package:job_exercise/ui/widgets/text_form_field_with_controller.dart';
 import 'package:provider/provider.dart';
 
-class EmployeeEditPage extends StatefulWidget {
-  EmployeeEditPage({Key key}) : super(key: key);
+class ChildEditPage extends StatefulWidget {
+  final String _parentId;
+
+  ChildEditPage(this._parentId, {Key key}) : super(key: key);
 
   @override
-  _EmployeeEditPageState createState() => _EmployeeEditPageState();
+  _ChildEditPageState createState() => _ChildEditPageState();
 }
 
-class _EmployeeEditPageState extends State<EmployeeEditPage> {
-
+class _ChildEditPageState extends State<ChildEditPage> {
   final _formKey = GlobalKey<FormState>();
 
-  TextFormFieldWithController position;
   CustomDateTimeField birthday;
   TextFormFieldWithController surname;
   TextFormFieldWithController firstname;
   TextFormFieldWithController secondname;
   FlatButton saveButton;
-  
+
   DateTime _birthdayTime;
 
-  _EmployeeEditPageState() : super() {
-     position = TextFormFieldWithController("Должность");
-     birthday = CustomDateTimeField("Дата рождения", (value) => _birthdayTime = value);
-     surname = TextFormFieldWithController("Отчество");
-     firstname = TextFormFieldWithController("Имя");
-     secondname = TextFormFieldWithController("Фамилия");
+  _ChildEditPageState() : super() {
+    birthday = CustomDateTimeField("Дата рождения", (value) => _birthdayTime = value);
+    surname = TextFormFieldWithController("Отчество");
+    firstname = TextFormFieldWithController("Имя");
+    secondname = TextFormFieldWithController("Фамилия");
 
     saveButton = FlatButton(
       onPressed: _save,
@@ -42,7 +41,7 @@ class _EmployeeEditPageState extends State<EmployeeEditPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
-        title: Text('Сотрудник'),
+        title: Text('Ребенок'),
       ),
       body: _getBody(context));
 
@@ -67,7 +66,7 @@ class _EmployeeEditPageState extends State<EmployeeEditPage> {
         padding: EdgeInsets.all(15),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[secondname, firstname, surname, birthday, position, saveButton],
+          children: <Widget>[secondname, firstname, surname, birthday, saveButton],
         ),
       ),
     );
@@ -75,8 +74,8 @@ class _EmployeeEditPageState extends State<EmployeeEditPage> {
 
   void _save() {
     if (_formKey.currentState.validate()) {
-      context.read<EmployeesProvider>().addEmployee(Employee(null, firstname.controller.text, secondname.controller.text,
-          surname.controller.text, _birthdayTime, position.controller.text));
+      context.read<ChildsProvider>().addChild(widget._parentId,
+          Child(null, firstname.controller.text, secondname.controller.text, surname.controller.text, _birthdayTime, widget._parentId));
       Navigator.pop(context);
     }
   }

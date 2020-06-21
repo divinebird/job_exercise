@@ -1,7 +1,7 @@
 import 'people.dart';
 
 class Child extends People {
-  final int parentId;
+  final String parentId;
 
   Child(id, firstname, secondname, surname, birthday, this.parentId)
       : super(id, firstname, secondname, surname, birthday);

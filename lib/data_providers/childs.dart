@@ -3,17 +3,17 @@ import 'package:flutter/widgets.dart';
 import 'package:job_exercise/models/child.dart';
 
 class ChildsProvider extends ChangeNotifier {
-  final _childsList = Map<int,List<Child>>();
+  final _childsList = Map<String,List<Child>>();
 
-  int getCountForParent(int id) {
+  int getCountForParent(String id) {
     return _childsList[id]?.length ?? 0;
   }
 
-  Child getChildForParent(int index, int parentId) {
+  Child getChildForParent(int index, String parentId) {
     return _childsList[parentId]?.elementAt(index);
   }
 
-  addChild(int parentId, Child newChild) {
+  addChild(String parentId, Child newChild) {
     var childsForParent = _childsList[parentId];
     if(childsForParent == null) {
       childsForParent = List<Child>();

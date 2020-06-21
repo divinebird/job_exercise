@@ -1,14 +1,15 @@
 
 import 'package:flutter/widgets.dart';
+import 'package:job_exercise/data_providers/employees_interface.dart';
 import 'package:job_exercise/models/employee.dart';
 
-class EmployeesProvider extends ChangeNotifier {
+class SimpleEmployeesProvider extends EmployeesProvider {
 
   final _employeesList = <Employee>[];
 
-  get count  => _employeesList.length;
+  get count  => Future.value(_employeesList.length);
 
-  Employee getEmployee([int index]) => _employeesList[index];
+  Future<Employee> getEmployee(int index) => Future.value(_employeesList[index]);
 
   addEmployee(Employee newItem) {
     _employeesList.add(newItem);

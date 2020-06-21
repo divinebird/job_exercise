@@ -11,8 +11,9 @@ class SimpleEmployeesProvider extends EmployeesProvider {
 
   Future<Employee> getEmployee(int index) => Future.value(_employeesList[index]);
 
-  addEmployee(Employee newItem) {
+  Future<void> addEmployee(Employee newItem) {
     _employeesList.add(newItem);
     notifyListeners();
+    return Future.value();
   }
 }

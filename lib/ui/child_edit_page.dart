@@ -75,7 +75,7 @@ class _ChildEditPageState extends State<ChildEditPage> {
 
   void _save() {
     if (_formKey.currentState.validate()) {
-      context.read<ChildsProvider>().addChild(widget._parentId,
+      context.read<ChildsProvider>().addChild(
           Child(null, firstname.controller.text, secondname.controller.text, surname.controller.text, _birthdayTime, widget._parentId));
       Navigator.pop(context);
     }

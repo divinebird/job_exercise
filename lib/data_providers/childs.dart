@@ -10,14 +10,15 @@ class SimpleChildsProvider extends ChildsProvider {
 
   Future<Child> getChildForParent(int index, String parentId) => Future.value(_childsList[parentId]?.elementAt(index));
 
-  addChild(String parentId, Child newChild) {
-    var childsForParent = _childsList[parentId];
+  Future<void> addChild(Child newChild) {
+    var childsForParent = _childsList[newChild.parentId];
     if(childsForParent == null) {
       childsForParent = List<Child>();
-      _childsList[parentId] = childsForParent;
+      _childsList[newChild.parentId] = childsForParent;
     }
     childsForParent.add(newChild);
     notifyListeners();
+    return Future.value();
   }
 
 }
